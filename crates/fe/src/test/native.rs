@@ -288,6 +288,7 @@ pub(super) fn prepare_tests(
         || -> Result<Vec<SingleTestJob>, String> {
             if !cfg!(any(
                 all(target_arch = "x86_64", target_os = "linux"),
+                all(target_arch = "aarch64", target_os = "linux"),
                 all(target_arch = "aarch64", target_os = "macos")
             )) {
                 return Err("native test execution supports x86-64 Linux and AArch64 macOS".into());

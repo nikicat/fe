@@ -5,6 +5,7 @@ use std::{fs, io::IsTerminal, path::Path, process::Command};
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -624,6 +625,7 @@ fn test_cli_build_emit_abi_writes_json_artifact() {
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -662,6 +664,7 @@ fn test_cli_build_native_executable_uses_main_return_as_exit_code() {
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -693,6 +696,7 @@ fn test_cli_build_native_executes_representative_programs_at_o0_and_o1() {
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -706,6 +710,7 @@ fn native_exit_code(source: &str, level: &str) -> Option<i32> {
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -734,6 +739,7 @@ fn build_native_program(source: &str, level: &str, temp: &Path) -> PathBuf {
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -760,6 +766,7 @@ fn native_program_exit_code(executable: &Path, args: &[&str], level: &str) -> Op
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -798,6 +805,7 @@ pub fn main() -> i32 {{
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -813,6 +821,7 @@ fn test_cli_native_trait_provider_source_capture() {
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -863,6 +872,7 @@ pub fn main() -> i32 {{
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -998,6 +1008,7 @@ pub fn main() -> i32 {{ if verify() {{ 0 }} else {{ 1 }} }}
     feature = "cranelift",
     any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     )
 ))]
@@ -1040,6 +1051,7 @@ fn test_cli_evm_power_edges() {
     feature = "cranelift",
     not(any(
         all(target_arch = "x86_64", target_os = "linux"),
+        all(target_arch = "aarch64", target_os = "linux"),
         all(target_arch = "aarch64", target_os = "macos")
     ))
 ))]
