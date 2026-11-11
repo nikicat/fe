@@ -118,7 +118,7 @@ fn the_wasm_backend_reports_what_was_written_down() {
     }
 }
 
-#[cfg(all(feature = "cranelift", target_arch = "x86_64", target_os = "linux"))]
+#[cfg(all(feature = "cranelift", native_host, target_os = "linux"))]
 #[test]
 fn the_native_and_wasm_backends_give_the_same_results() {
     for level in ["0", "1", "2"] {

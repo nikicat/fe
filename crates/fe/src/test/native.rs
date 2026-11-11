@@ -11,6 +11,7 @@ use std::{
 
 use camino::Utf8PathBuf;
 use codegen::{ExpectedRevert, OptLevel, emit_test_suite_native};
+use common::compilation::Os;
 use driver::DriverDataBase;
 use hir::hir_def::TopLevelMod;
 use tempfile::{Builder, TempDir};
@@ -321,11 +322,11 @@ pub(super) fn prepare_tests(
     let mut artifact_output = String::new();
     let prepared = emit_with_catch_unwind(
         || -> Result<Vec<SingleTestJob>, String> {
-            if !cfg!(any(
-                all(target_arch = "x86_64", target_os = "linux"),
-                all(target_arch = "aarch64", target_os = "macos")
-            )) {
-                return Err("native test execution supports x86-64 Linux and AArch64 macOS".into());
+            if Os::host().is_none() {
+                return Err(format!(
+                    "native test execution requires an {} host",
+                    Os::SUPPORTED_HOSTS
+                ));
             }
             let out_dir = (!emit.is_empty())
                 .then(|| default_test_emit_dir(source_path))

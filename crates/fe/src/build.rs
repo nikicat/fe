@@ -191,10 +191,10 @@ fn validate_build_request(
         BuildBackend::Native
             if (emit.executable || emit.library()) && Os::host().is_none() =>
         {
-            Err(
-                "native executable and library output currently require an x86-64 Linux or AArch64 macOS host"
-                    .to_string(),
-            )
+            Err(format!(
+                "native executable and library output currently require an {} host",
+                Os::SUPPORTED_HOSTS
+            ))
         }
         #[cfg(feature = "cranelift")]
         BuildBackend::Native => Ok(()),

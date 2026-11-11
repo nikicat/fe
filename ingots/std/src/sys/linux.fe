@@ -1,5 +1,7 @@
 #![cfg(target_os = "linux")]
-/// glibc's x86-64 layouts and values.
+/// glibc's Linux layouts and values. They hold on x86-64 and AArch64, except the
+/// offset of `st_mode`. It is 24 here, as on x86-64, and 16 on AArch64. So
+/// `stat_mode` is wrong on AArch64 (argotorg/fe#1975).
 use core::MemSpan
 
 extern {

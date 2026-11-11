@@ -93,11 +93,17 @@ pub enum Os {
 impl Os {
     pub const ALL: [Os; 2] = [Os::Linux, Os::Macos];
 
-    /// The operating system native builds target: the compiler's host, if
-    /// native code supports it. Native code supports x86-64 Linux and
-    /// AArch64 macOS, so code for an OS can assume its architecture.
+    /// The hosts [`Os::host`] supports, named for messages.
+    pub const SUPPORTED_HOSTS: &str = "x86-64 Linux, AArch64 Linux or AArch64 macOS";
+
+    /// Returns the compiler's host OS when native code supports that host, one of
+    /// [`Os::SUPPORTED_HOSTS`]. On AArch64 Linux, std's file metadata is wrong
+    /// (ingots/std/src/sys/linux.fe).
     pub fn host() -> Option<Os> {
-        if cfg!(all(target_arch = "x86_64", target_os = "linux")) {
+        if cfg!(all(
+            any(target_arch = "x86_64", target_arch = "aarch64"),
+            target_os = "linux"
+        )) {
             Some(Os::Linux)
         } else if cfg!(all(target_arch = "aarch64", target_os = "macos")) {
             Some(Os::Macos)

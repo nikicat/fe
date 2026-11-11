@@ -71,8 +71,8 @@ pub enum BuildEmit {
 pub enum BuildBackend {
     Sonatina,
     #[cfg(feature = "cranelift")]
-    /// Host-native IR, or executables and libraries on x86-64 Linux and
-    /// AArch64 macOS.
+    /// Host-native IR, or executables and libraries on x86-64 Linux,
+    /// AArch64 Linux or AArch64 macOS.
     Native,
     #[cfg(feature = "sp1")]
     /// RV64IM SP1 guest IR or ELF executables.
@@ -1544,5 +1544,16 @@ fn format_single_file(path: &Utf8PathBuf, config: &fe_fmt::Config, check: bool) 
     FormatResult::Formatted {
         original,
         formatted,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use common::compilation::Os;
+
+    /// build.rs sets `native_host` from its own copy of the hosts `Os::host` admits.
+    #[test]
+    fn native_host_cfg_matches_os_host() {
+        assert_eq!(cfg!(native_host), Os::host().is_some());
     }
 }

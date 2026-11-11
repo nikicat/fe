@@ -225,8 +225,8 @@ fe test --backend native examples/wasm/tests.fe
 
 Each `#[test]` function is built into its own module and run in its own Node.js
 process with `host.mjs`. A test passes if it returns. The same file gives the same
-results on the native backend (the second command, on x86-64 Linux or AArch64
-macOS).
+results on the native backend (the second command, on x86-64 Linux, AArch64
+Linux or AArch64 macOS).
 
 - A failed assertion, an overflow, a division by zero and an index outside an array
   trap. The test fails with `trap: unreachable`; the engine does not say which of
